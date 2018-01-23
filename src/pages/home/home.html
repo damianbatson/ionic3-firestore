@@ -3,12 +3,30 @@
     <ion-title>
       Ionic Blank
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="this.afAuth.auth.signOut()">
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <div *ngFor="let item of items | async">
+    <h1>{{ item.itemid}}</h1>
+    <p>{{ item.description}}</p>
+    <!-- <p> {{ user.uid }}</p> -->
+  </div>
+  <form (ngSubmit)="addItem()">
+    <ion-item>
+      <ion-label>Todo</ion-label>
+      <ion-input type="text" [(ngModel)]="itemid" name="itemid"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Description</ion-label>
+      <ion-textarea [(ngModel)]="description" name="description"></ion-textarea>
+    </ion-item>
+    <button ion-button type="submit" block>Add Todo</button>
+  </form>
+  <button ion-button (click)="addItem()">ADD NEW ITEM</button>
 </ion-content>
